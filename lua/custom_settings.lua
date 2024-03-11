@@ -1,0 +1,117 @@
+-- Custom settings
+
+-- No line wrap
+vim.opt.wrap = false           -- turnoff line wrap
+vim.opt.expandtab = true       -- replace <Tab> with spaces
+vim.opt.tabstop = 2            -- number of spaces that a <Tab> in the file counts for
+vim.opt.softtabstop = 2        -- remove <Tab> symbols as it was spaces
+vim.opt.shiftwidth = 2         -- indent size for << and >>
+vim.opt.shiftround = true      -- round indent to multiple of 'shiftwidth' (for << and >>)
+vim.opt.smartindent = true     -- Smart indent
+
+-- NOTE: You should make sure your terminal supports this
+vim.o.termguicolors = true
+
+-- remember history
+vim.opt.undodir = vim.fn.expand('~/.vim/undodir')
+vim.opt.swapfile = false
+vim.opt.backup = false
+
+-- Fix Typos
+vim.cmd([[
+aug FixTypos
+:command! WQ wq
+:command! Wq wq
+:command! QA qa
+:command! Qa qa
+:command! W  w
+:command! Q  q
+:cmap     Q! q!
+aug end
+]])
+
+-- Go to definition splits in vertical window
+vim.keymap.set('n', '<C-]>', ':vsplit<CR><C-]>', { noremap=true, silent=true})
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Keeps the current visual block selection active after changing indent
+vim.keymap.set('v', '>', "v:count == 0 ? '>gv' : '>'", { expr = true, silent = true })
+vim.keymap.set('v', '<', "v:count == 0 ? '<gv' : '<'", { expr = true, silent = true })
+
+-- highlight last paste
+vim.keymap.set('n', 'gp', '`[v`]', { silent = true, noremap = true })
+
+-- Switch terminal
+vim.cmd([[
+tnoremap <c-h> <C-\><C-n><C-w>h
+tnoremap <c-j> <C-\><C-n><C-w>j
+tnoremap <c-k> <C-\><C-n><C-w>k
+tnoremap <c-l> <C-\><C-n><C-w>l
+]])
+
+-- Switch between buffers and tabs
+vim.keymap.set('n', '<leader><tab>', '<C-^>')
+vim.keymap.set('n', '<leader>1', '1gt')
+vim.keymap.set('n', '<leader>2', '2gt')
+vim.keymap.set('n', '<leader>3', '3gt')
+vim.keymap.set('n', '<leader>4', '4gt')
+vim.keymap.set('n', '<leader>5', '5gt')
+vim.keymap.set('n', '<leader>6', '6gt')
+vim.keymap.set('n', '<leader>7', '7gt')
+vim.keymap.set('n', '<leader>8', '8gt')
+vim.keymap.set('n', '<leader>9', '9gt')
+-- Diff with previous commit on GV
+vim.api.nvim_create_autocmd('FileType', {
+  group    = vim.api.nvim_create_augroup("diffview-gv", { clear = true }),
+  pattern  = 'GV',
+  callback = function()
+    vim.keymap.set('n', ',', function()
+      local curr_line = vim.api.nvim_get_current_line()
+      local _, sha, _ = string.match(curr_line, '(^*%d%d%d%d--%d%d--%d%d%s)(%x+)(%s.*)')
+      if sha ~= nil then
+        vim.api.nvim_input(':DiffviewOpen ' .. sha .. '^!')
+      end
+    end)
+  end
+})
+
+-- border hover window
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  { border = 'rounded' }
+)
+
+-- border signature window
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = 'rounded' }
+)
+
+-- border diagnostic floating window
+vim.diagnostic.config({
+  virtual_text = true,
+  virtual_lines = false,
+  severity_sort = true,
+  float = {
+    border = 'rounded',
+    source = 'always',
+  },
+})
+
+-- Customize diagnostic signs
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+
+sign({name = 'DiagnosticSignError', text = '✘'})
+sign({name = 'DiagnosticSignWarn', text = '▲'})
+sign({name = 'DiagnosticSignHint', text = '⚑'})
+sign({name = 'DiagnosticSignInfo', text = '𝒊'})
+
