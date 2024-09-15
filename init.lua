@@ -272,7 +272,7 @@ require('lazy').setup({
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
-    enabled=false,
+    enabled = false,
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
       icons = {
@@ -638,7 +638,7 @@ require('lazy').setup({
               useLibraryCodeForTypes = true,
               diagnosticMode = 'openFilesOnly',
               extraPaths = { 'src' },
-              typeCheckingMode = "off",
+              typeCheckingMode = 'off',
             },
           },
         },
@@ -729,11 +729,11 @@ require('lazy').setup({
           'isort',
           'black',
         },
-        javascript = { 'eslint_d'},
-        typescript = { 'eslint_d'},
-        typescriptreact = { 'eslint_d','prettierd'},
-        javascriptreact = { 'prettierd'}, -- for some reason UI package uses prettier for format
-        json = { "fixjson" },
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        typescriptreact = { 'eslint_d', 'prettierd' },
+        javascriptreact = { 'prettierd' }, -- for some reason UI package uses prettier for format
+        json = { 'fixjson' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -909,12 +909,11 @@ require('lazy').setup({
   },
 
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
+    'rose-pine/neovim',
+    name = 'rose-pine',
     init = function()
       -- Load the colorscheme here.
-      vim.cmd("colorscheme rose-pine-moon")
-
+      vim.cmd 'colorscheme rose-pine-moon'
     end,
   },
 
@@ -923,8 +922,8 @@ require('lazy').setup({
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
-    event="VeryLazy",
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects"},
+    event = 'VeryLazy',
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -933,25 +932,25 @@ require('lazy').setup({
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
-      local spec_treesitter = require("mini.ai").gen_spec.treesitter
-      require("mini.ai").setup {
+      local spec_treesitter = require('mini.ai').gen_spec.treesitter
+      require('mini.ai').setup {
         n_lines = 1000,
         custom_textobjects = {
           a = spec_treesitter {
-            a = "@parameter.outer",
-            i = "@parameter.inner",
+            a = '@parameter.outer',
+            i = '@parameter.inner',
           },
           f = spec_treesitter {
-            a = "@function.outer",
-            i = "@function.inner",
+            a = '@function.outer',
+            i = '@function.inner',
           },
           o = spec_treesitter {
-            a = { "@conditional.outer", "@loop.outer" },
-            i = { "@conditional.inner", "@loop.inner" },
+            a = { '@conditional.outer', '@loop.outer' },
+            i = { '@conditional.inner', '@loop.inner' },
           },
           c = spec_treesitter {
-            a = { "@class.outer" },
-            i = { "@class.inner" },
+            a = { '@class.outer' },
+            i = { '@class.inner' },
           },
         },
       }
@@ -1057,12 +1056,23 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.dressing',
+  require 'kickstart.plugins.nvim_lint',
+  require 'kickstart.plugins.git_signs',
+  require 'kickstart.plugins.tabby',
+  require 'kickstart.plugins.vim_test',
+  require 'kickstart.plugins.vim_coverage',
+  require 'kickstart.plugins.dial',
+  require 'kickstart.plugins.oxo_carbon',
+  require 'kickstart.plugins.python_syntax_hls',
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
