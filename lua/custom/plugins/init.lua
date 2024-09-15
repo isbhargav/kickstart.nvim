@@ -22,19 +22,17 @@ return {
   'airblade/vim-rooter',
   {
     'klen/nvim-config-local',
-    lazy=false,
-    opts={
+    lazy = false,
+    opts = {
       silent = true,
       -- Config file patterns to load (lua supported)
       config_files = {
-        ".nvim.lua",
-        ".nvimrc",
-        ".exrc",
-        ".init.lua",
+        '.nvim.lua',
+        '.nvimrc',
+        '.exrc',
+        '.init.lua',
       },
-    }
-
-
+    },
   },
 
   'tpope/vim-rhubarb',
@@ -47,7 +45,7 @@ return {
 
   {
     'tpope/vim-fugitive',
-    lazy=false,
+    lazy = false,
     -- cmd = { 'Git', 'G' },
     keys = { { '<leader>gs', '<cmd>Git<cr>', desc = '[G]it [S]tatus' } },
   },
@@ -64,11 +62,11 @@ return {
     },
   },
   {
-    "rbong/vim-flog",
+    'rbong/vim-flog',
     lazy = true,
-    cmd = { "Flog", "Flogsplit", "Floggit" },
+    cmd = { 'Flog', 'Flogsplit', 'Floggit' },
     dependencies = {
-      "tpope/vim-fugitive",
+      'tpope/vim-fugitive',
     },
   },
 
@@ -78,41 +76,42 @@ return {
       { '-', '<CMD>Oil<CR>', mode = 'n', desc = 'Open parent directory' },
     },
     ---@module 'oil'
-  ---@type oil.SetupOpts
+    ---@type oil.SetupOpts
     opts = {
       columns = {
-        "icon",
-        "permissions",
-        "size",
-        "mtime",
+        'icon',
+        'permissions',
+        'size',
+        'mtime',
       },
       view_options = {
         -- Show files and directories that start with "."
         show_hidden = true,
       },
       keymaps = {
-        ["g?"] = "actions.show_help",
-        ["<CR>"] = "actions.select",
-        ["<C-s>"] = "actions.select_vsplit",
-        ["<C-h>"] = false,
-        ["<C-t>"] = "actions.select_tab",
-        ["<C-p>"] = "actions.preview",
-        ["<C-c>"] = "actions.close",
-        ["<C-l>"] = false,
-        ["-"] = "actions.parent",
-        ["_"] = "actions.open_cwd",
-        ["`"] = "actions.cd",
-        ["~"] = "actions.tcd",
-        ["gs"] = "actions.change_sort",
-        ["gx"] = "actions.open_external",
-        ["g."] = "actions.toggle_hidden",
-        ["g\\"] = "actions.toggle_trash",
+        ['g?'] = 'actions.show_help',
+        ['<CR>'] = 'actions.select',
+        ['<C-s>'] = 'actions.select_vsplit',
+        ['<C-h>'] = false,
+        ['<C-t>'] = 'actions.select_tab',
+        ['<C-p>'] = 'actions.preview',
+        ['<C-c>'] = 'actions.close',
+        ['<C-l>'] = false,
+        ['-'] = 'actions.parent',
+        ['_'] = 'actions.open_cwd',
+        ['`'] = 'actions.cd',
+        ['~'] = 'actions.tcd',
+        ['gs'] = 'actions.change_sort',
+        ['gx'] = 'actions.open_external',
+        ['g.'] = 'actions.toggle_hidden',
+        ['g\\'] = 'actions.toggle_trash',
       },
     },
     -- Optional dependencies
     dependencies = {
       -- 'nvim-tree/nvim-web-devicons',
-    "echasnovski/mini.icons", opts = {},
+      'echasnovski/mini.icons',
+      opts = {},
     },
   },
   {
@@ -225,15 +224,14 @@ return {
   {
     'norcalli/nvim-colorizer.lua',
     event = 'VeryLazy',
-    config=function ()
-      require 'colorizer'.setup({
-        'css';
-        'scss';
-        'javascript';
-        html = { mode = 'background' };
+    config = function()
+      require('colorizer').setup({
+        'css',
+        'scss',
+        'javascript',
+        html = { mode = 'background' },
       }, { mode = 'foreground' })
-
-    end
+    end,
   },
 
   {
@@ -324,68 +322,59 @@ return {
 
   -- Markdown preview
   {
-    "ellisonleao/glow.nvim",
-    opts={
+    'ellisonleao/glow.nvim',
+    opts = {
       minimum_width = 120,
       minimum_height = 120,
-       -- width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
+      -- width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
       -- height_ratio = 0.9,
     },
-    cmd = "Glow",
+    cmd = 'Glow',
   },
   --handling CSV data with Vim
   {
-    "chrisbra/csv.vim",
-    lazy=false,
+    'chrisbra/csv.vim',
+    lazy = false,
   },
 
   {
-    dir ='/apollo/env/envImprovement/vim/plugin/LinkToCodeBrowser.vim',
-    cmd="LinkToCodeBrowser"
-  },
-  {
-    dir ='/apollo/env/envImprovement/vim/plugin/LargeFile.vim',
-  },
-  {
-    dir ='/apollo/env/envImprovement/vim/amazon/s3',
-    cmd={ "S3Get", "S3Put" }
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
+    'ray-x/lsp_signature.nvim',
+    event = 'VeryLazy',
     opts = {
-      hint_prefix = "➤ "
-
+      hint_prefix = '➤ ',
     },
-    config = function(_, opts) require'lsp_signature'.setup(opts) end
+    config = function(_, opts)
+      require('lsp_signature').setup(opts)
+    end,
   },
   {
     -- <c-a> and <c-x> for numbers
-    "smjonas/live-command.nvim", -- live command
+    'smjonas/live-command.nvim', -- live command
     config = function()
-      require("live-command").setup({commands = {Norm = {cmd = "norm"}}})
-    end
+      require('live-command').setup { commands = { Norm = { cmd = 'norm' } } }
+    end,
   },
 
   {
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async',
-    init=function ()
+    init = function()
       vim.o.foldcolumn = '1' -- '0' is not bad
       vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
     end,
-    opts={
+    opts = {
       provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
-      end
+        return { 'treesitter', 'indent' }
+      end,
     },
   },
 
   {
-    url="https://gitlab.com/schrieveslaach/sonarlint.nvim",
-    event='LspAttach',
+    url = 'https://gitlab.com/schrieveslaach/sonarlint.nvim',
+    enabled = false,
+    event = 'LspAttach',
     opts = {
       server = {
         cmd = {
@@ -394,11 +383,11 @@ return {
           '-stdio',
           '-analyzers',
           -- paths to the analyzers you need, using those for python and java in this example
-          vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
-          vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
-          vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcgo.jar"),
-          vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjs.jar"),
-        }
+          vim.fn.expand '$MASON/share/sonarlint-analyzers/sonarcfamily.jar',
+          vim.fn.expand '$MASON/share/sonarlint-analyzers/sonarpython.jar',
+          vim.fn.expand '$MASON/share/sonarlint-analyzers/sonarcgo.jar',
+          vim.fn.expand '$MASON/share/sonarlint-analyzers/sonarjs.jar',
+        },
       },
       filetypes = {
         -- Tested and working
@@ -407,8 +396,7 @@ return {
         'python',
         'typescript',
         'javascript',
-      }
-    }
+      },
+    },
   },
-
 }

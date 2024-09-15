@@ -391,7 +391,7 @@ require('lazy').setup({
         defaults = {
           mappings = {
             i = {
-              { ['<c-enter>'] = 'to_fuzzy_refine' },
+              ['<c-enter>'] = 'to_fuzzy_refine',
               ['<esc><esc>'] = require('telescope.actions').close,
               ['<C-j>'] = require('telescope.actions').move_selection_next,
               ['<C-k>'] = require('telescope.actions').move_selection_previous,
@@ -416,6 +416,7 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -1062,10 +1063,10 @@ require('lazy').setup({
   require 'kickstart.plugins.git_signs',
   require 'kickstart.plugins.tabby',
   require 'kickstart.plugins.vim_test',
-  require 'kickstart.plugins.vim_coverage',
   require 'kickstart.plugins.dial',
-  require 'kickstart.plugins.oxo_carbon',
-  require 'kickstart.plugins.python_syntax_hls',
+  -- require 'kickstart.plugins.vim_coverage',
+  -- require 'kickstart.plugins.oxo_carbon',
+  -- require 'kickstart.plugins.python_syntax_hls',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
