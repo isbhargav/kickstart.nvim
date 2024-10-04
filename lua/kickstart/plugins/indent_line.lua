@@ -1,6 +1,6 @@
 local highlight = {
-    "CursorColumn",
-    "Whitespace",
+  'CursorColumn',
+  'Whitespace',
 }
 
 return {
@@ -8,16 +8,15 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
-    event="VeryLazy",
+    event = 'VeryLazy',
     main = 'ibl',
     opts = {
-      indent = { highlight = highlight, char = "" },
+      indent = { highlight = highlight, char = '' },
       whitespace = {
         highlight = highlight,
         remove_blankline_trail = false,
       },
       scope = { enabled = false },
-
     },
   },
 }

@@ -5,11 +5,12 @@ return {
 
     lint.linters_by_ft = {
       python = { 'flake8', 'mypy', 'cspell' },
-      javascript = { 'eslint_d', 'cspell' },
-      typescript = { 'eslint_d', 'cspell' },
-      javascriptreact = { "eslint_d", 'cspell' },
-      typescriptreact = { "eslint_d", 'cspell' },
+      javascript = { 'cspell' },
+      typescript = { 'cspell' },
+      javascriptreact = { 'cspell' },
+      typescriptreact = { 'cspell' },
       -- scss = {"stylelint"},
+      ['*'] = { 'typos' },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

@@ -20,6 +20,14 @@ return {
   -- Additional lua configuration, makes nvim stuff amazing!
   'folke/neodev.nvim',
   'airblade/vim-rooter',
+  -- {
+  --   'notjedi/nvim-rooter.lua',
+  --   -- NOTE: avoid lazy loading as the autocmds may not be caught by nvim-rooter.lua.
+  --   lazy = false,
+  --   opts = {
+  --     manual = false,
+  --   },
+  -- },
   {
     'klen/nvim-config-local',
     lazy = false,
@@ -342,10 +350,11 @@ return {
     event = 'VeryLazy',
     opts = {
       hint_prefix = '➤ ',
+      bind = true,
+      handler_opts = {
+        border = 'rounded',
+      },
     },
-    config = function(_, opts)
-      require('lsp_signature').setup(opts)
-    end,
   },
   {
     -- <c-a> and <c-x> for numbers
@@ -353,22 +362,6 @@ return {
     config = function()
       require('live-command').setup { commands = { Norm = { cmd = 'norm' } } }
     end,
-  },
-
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = 'kevinhwang91/promise-async',
-    init = function()
-      vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-    end,
-    opts = {
-      provider_selector = function(bufnr, filetype, buftype)
-        return { 'treesitter', 'indent' }
-      end,
-    },
   },
 
   {
@@ -398,5 +391,15 @@ return {
         'javascript',
       },
     },
+  },
+  {
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('refactoring').setup()
+    end,
   },
 }

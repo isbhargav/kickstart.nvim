@@ -642,6 +642,8 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         ts_ls = {},
+        rust_analyzer = {},
+        eslint = {},
         pyright = {
           python = {
             analysis = {
@@ -735,15 +737,12 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = {
-          'autoflake8',
-          'isort',
-          'black',
-        },
-        javascript = { 'eslint_d' },
-        typescript = { 'eslint_d' },
-        typescriptreact = { 'eslint_d', 'prettierd' },
-        javascriptreact = { 'prettierd' }, -- for some reason UI package uses prettier for format
+        c = { 'clang-format' },
+        python = { 'autoflake8', 'isort', 'black' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        javascriptreact = { 'prettier' }, -- for some reason UI package uses prettier for format
         json = { 'fixjson' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
@@ -853,7 +852,7 @@ require('lazy').setup({
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
           --['<Tab>'] = cmp.mapping.select_next_item(),
           --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -900,32 +899,39 @@ require('lazy').setup({
     end,
   },
 
-  -- { -- You can easily change to a different colorscheme.
-  --   -- Change the name of the colorscheme plugin below, and then
-  --   -- change the command in the config to whatever the name of that colorscheme is.
-  --   --
-  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
-  --   init = function()
-  --     -- Load the colorscheme here.
-  --     -- Like many other themes, this one has different styles, and you could load
-  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --
-  --     -- vim.cmd.colorscheme 'tokyonight-night'
-  --
-  --     -- You can configure highlights by doing something like:
-  --     vim.cmd.hi 'Comment gui=none'
-  --   end,
-  -- },
+  { -- You can easily change to a different colorscheme.
+    -- Change the name of the colorscheme plugin below, and then
+    -- change the command in the config to whatever the name of that colorscheme is.
+    --
+    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    'folke/tokyonight.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    init = function()
+      -- Load the colorscheme here.
+      -- Like many other themes, this one has different styles, and you could load
+      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+
+      vim.cmd.colorscheme 'tokyonight-night'
+
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi 'Comment gui=none'
+    end,
+  },
 
   {
     'ntk148v/habamax.nvim',
-    dependencies = { 'rktjmp/lush.nvim' },
+    dependencies = {
+      'rktjmp/lush.nvim',
+      -- 'EdenEast/nightfox.nvim',
+      'blazkowolf/gruber-darker.nvim',
+    },
+    priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
-      vim.cmd 'colorscheme habamax.nvim'
 
+      -- vim.cmd 'colorscheme habamax.nvim'
+      -- vim.cmd 'colorscheme nightfox'
+      -- vim.cmd 'colorscheme gruber-darker'
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
@@ -1066,10 +1072,11 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
+  require 'kickstart.plugins.custom_settings',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.dressing',
   require 'kickstart.plugins.nvim_lint',
@@ -1077,6 +1084,8 @@ require('lazy').setup({
   require 'kickstart.plugins.tabby',
   require 'kickstart.plugins.vim_test',
   require 'kickstart.plugins.dial',
+  require 'kickstart.plugins.nvim_ufo',
+  require 'kickstart.plugins.avante',
   -- require 'kickstart.plugins.vim_coverage',
   -- require 'kickstart.plugins.oxo_carbon',
   -- require 'kickstart.plugins.python_syntax_hls',
