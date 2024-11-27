@@ -4,6 +4,10 @@
 -- See the kickstart.nvim README for more information
 return {
 
+  {
+    'LintaoAmons/scratch.nvim',
+    event = 'VeryLazy',
+  },
   -- Beautiful messages
   {
     'rcarriga/nvim-notify',
@@ -339,6 +343,8 @@ return {
     },
     cmd = 'Glow',
   },
+  'wookayin/vim-typora',
+
   --handling CSV data with Vim
   {
     'chrisbra/csv.vim',

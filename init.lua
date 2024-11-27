@@ -641,7 +641,13 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        ts_ls = {},
+        denols = {
+          root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
+        },
+        ts_ls = {
+          root_dir = require('lspconfig').util.root_pattern 'package.json',
+          single_file_support = false,
+        },
         rust_analyzer = {},
         eslint = {},
         pyright = {
@@ -905,6 +911,7 @@ require('lazy').setup({
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
+    enabled = true,
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
@@ -914,24 +921,21 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
 
   {
-    'ntk148v/habamax.nvim',
+    'EdenEast/nightfox.nvim',
+    enabled = false,
     dependencies = {
       'rktjmp/lush.nvim',
-      -- 'EdenEast/nightfox.nvim',
-      'blazkowolf/gruber-darker.nvim',
     },
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
-
-      -- vim.cmd 'colorscheme habamax.nvim'
       -- vim.cmd 'colorscheme nightfox'
-      -- vim.cmd 'colorscheme gruber-darker'
+
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
