@@ -95,4 +95,13 @@ sign { name = 'DiagnosticSignWarn', text = '▲' }
 sign { name = 'DiagnosticSignHint', text = '⚑' }
 sign { name = 'DiagnosticSignInfo', text = '𝒊' }
 
+-- Diagnostic Keymaps
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.goto_prev { float = true }
+end, { desc = 'Go to previous [D]iagnostic message' })
+
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.goto_next { float = true }
+end, { desc = 'Go to next [D]iagnostic message' })
+
 return {}
