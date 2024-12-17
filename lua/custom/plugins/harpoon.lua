@@ -15,7 +15,7 @@ return {
     }
     -- REQUIRED
 
-    vim.keymap.set('n', '<C-p>', function()
+    vim.keymap.set('n', '<C-m>', function()
       harpoon:list():add()
     end)
     vim.keymap.set('n', '<leader>p', function()

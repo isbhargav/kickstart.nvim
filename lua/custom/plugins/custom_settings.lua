@@ -63,20 +63,6 @@ vim.keymap.set('n', '<leader>6', '6gt')
 vim.keymap.set('n', '<leader>7', '7gt')
 vim.keymap.set('n', '<leader>8', '8gt')
 vim.keymap.set('n', '<leader>9', '9gt')
--- Diff with previous commit on GV
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('diffview-gv', { clear = true }),
-  pattern = 'GV',
-  callback = function()
-    vim.keymap.set('n', ',', function()
-      local curr_line = vim.api.nvim_get_current_line()
-      local _, sha, _ = string.match(curr_line, '(^*%d%d%d%d--%d%d--%d%d%s)(%x+)(%s.*)')
-      if sha ~= nil then
-        vim.api.nvim_input(':DiffviewOpen ' .. sha .. '^!')
-      end
-    end)
-  end,
-})
 
 -- border hover window
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })

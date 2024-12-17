@@ -1,7 +1,15 @@
 return {
   'stevearc/oil.nvim',
   keys = {
-    { '-', '<CMD>Oil<CR>', mode = 'n', desc = 'Open parent directory' },
+    -- { '-', '<CMD>Oil<CR>', mode = 'n', desc = 'Open parent directory' },
+    {
+      '-',
+      function()
+        require('oil').open()
+      end,
+      mode = 'n',
+      desc = 'Open parent directory',
+    },
   },
   ---@module 'oil'
   ---@type oil.SetupOpts

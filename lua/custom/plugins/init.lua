@@ -23,14 +23,7 @@ return {
   -- Additional lua configuration, makes nvim stuff amazing!
   'folke/neodev.nvim',
   'airblade/vim-rooter',
-  -- {
-  --   'notjedi/nvim-rooter.lua',
-  --   -- NOTE: avoid lazy loading as the autocmds may not be caught by nvim-rooter.lua.
-  --   lazy = false,
-  --   opts = {
-  --     manual = false,
-  --   },
-  -- },
+
   {
     'klen/nvim-config-local',
     lazy = false,
@@ -46,9 +39,9 @@ return {
     },
   },
 
-  'tpope/vim-rhubarb',
   -- from tpope's vault
-  { 'tpope/vim-unimpaired', event = 'VeryLazy' },
+  'tpope/vim-rhubarb',
+  'tpope/vim-unimpaired',
   'tpope/vim-projectionist',
   'tpope/vim-dispatch',
   'tpope/vim-eunuch',
@@ -57,28 +50,8 @@ return {
   {
     'tpope/vim-fugitive',
     lazy = false,
-    -- cmd = { 'Git', 'G' },
+    cmd = { 'Git', 'G' },
     keys = { { '<leader>gs', '<cmd>Git<cr>', desc = '[G]it [S]tatus' } },
-  },
-
-  'rhysd/git-messenger.vim',
-
-  {
-    'junegunn/gv.vim',
-    dependencies = { 'tpope/vim-fugitive' },
-    cmd = { 'GV' },
-    keys = {
-      { '<leader>gv', '<cmd>GV<cr>', mode = 'n', desc = '[G]it [V]ertical Graph' },
-      { '<leader>gv', "<cmd>'<,'>GV<cr>", mode = 'v', desc = '[G]it [V]ertical Graph' },
-    },
-  },
-  {
-    'rbong/vim-flog',
-    lazy = true,
-    cmd = { 'Flog', 'Flogsplit', 'Floggit' },
-    dependencies = {
-      'tpope/vim-fugitive',
-    },
   },
 
   {
@@ -95,13 +68,6 @@ return {
     opts = {},
   },
 
-  {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    config = true,
-    -- use opts = {} for passing setup options
-    -- this is equalent to setup({}) function
-  },
   -- align text
   {
     'junegunn/vim-easy-align',
@@ -130,25 +96,6 @@ return {
       vim.cmd [[ let g:slime_default_config = {"socket_name": "default", "target_pane": ".2"} ]]
       vim.cmd [[ let g:slime_dont_ask_default = 1 ]]
       vim.cmd [[ let g:slime_bracketed_paste = 1 ]]
-    end,
-  },
-  -- OSCYank
-  {
-    'ojroques/nvim-osc52',
-    branch = 'main',
-    config = function()
-      require('osc52').setup {
-        max_length = 0, -- Maximum length of selection (0 for no limit)
-        silent = false, -- Disable message on successful copy
-        trim = false, -- Trim surrounding whitespaces before copy
-        tmux_passthrough = false, -- Use tmux passthrough (requires tmux: set -g allow-passthrough on)
-      }
-
-      vim.g.oscyank_term = 'default' -- or 'screen', 'kitty', 'tmux'
-
-      vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, { expr = true })
-      vim.keymap.set('n', '<leader>cc', '<leader>c_', { remap = true })
-      vim.keymap.set('v', '<leader>c', require('osc52').copy_visual)
     end,
   },
 
@@ -207,16 +154,6 @@ return {
     opts = {},
   },
 
-  -- split/join lines
-  {
-    'Wansmer/treesj',
-    cmd = { 'TSJJoin', 'TSJSplit' },
-    keys = {
-      { 'gJ', '<cmd>TSJJoin<cr>', desc = 'Join Line' },
-      { 'gS', '<cmd>TSJSplit<cr>', desc = 'SPlit Line' },
-    },
-    opts = { use_default_keymaps = false, max_join_length = 300 },
-  },
   -- Extend vim %
   {
     'andymass/vim-matchup',
@@ -233,19 +170,6 @@ return {
       { '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>', desc = 'Desc' },
     },
   },
-
-  -- Markdown preview
-  {
-    'ellisonleao/glow.nvim',
-    opts = {
-      minimum_width = 120,
-      minimum_height = 120,
-      -- width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
-      -- height_ratio = 0.9,
-    },
-    cmd = 'Glow',
-  },
-  'wookayin/vim-typora',
 
   --handling CSV data with Vim
   {
