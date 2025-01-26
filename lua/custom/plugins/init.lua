@@ -2,6 +2,8 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+---@module "lazy"
+---@type LazySpec
 return {
   {
     'LintaoAmons/scratch.nvim',
@@ -21,7 +23,6 @@ return {
   },
 
   -- Additional lua configuration, makes nvim stuff amazing!
-  'folke/neodev.nvim',
   'airblade/vim-rooter',
 
   {
@@ -179,6 +180,7 @@ return {
 
   {
     'ray-x/lsp_signature.nvim',
+    enabled = false,
     event = 'VeryLazy',
     opts = {
       hint_prefix = '➤ ',
