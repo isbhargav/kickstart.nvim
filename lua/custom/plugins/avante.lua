@@ -1,6 +1,7 @@
 return {
   'yetone/avante.nvim',
   event = 'VeryLazy',
+  enabled = false,
   lazy = false,
   version = false, -- set this if you want to always pull the latest change
   opts = {
@@ -42,7 +43,7 @@ return {
     'MunifTanjim/nui.nvim',
     --- The below dependencies are optional,
     'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
-    'zbirenbaum/copilot.lua', -- for providers='copilot'
+    -- 'zbirenbaum/copilot.lua', -- for providers='copilot'
     {
       -- support for image pasting
       'HakonHarnes/img-clip.nvim',

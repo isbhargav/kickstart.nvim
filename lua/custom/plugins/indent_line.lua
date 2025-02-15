@@ -9,7 +9,7 @@ return {
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     event = 'VeryLazy',
-    enabled = true,
+    enabled = false,
     main = 'ibl',
     opts = {
       indent = { highlight = highlight, char = '' },

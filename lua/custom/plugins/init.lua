@@ -9,22 +9,6 @@ return {
     'LintaoAmons/scratch.nvim',
     event = 'VeryLazy',
   },
-  -- Beautiful messages
-  {
-    'rcarriga/nvim-notify',
-    opts = {
-      minimum_width = 25,
-      render = 'minimal',
-      timeout = 2000,
-    },
-    config = function()
-      vim.notify = require 'notify'
-    end,
-  },
-
-  -- Additional lua configuration, makes nvim stuff amazing!
-  'airblade/vim-rooter',
-
   {
     'klen/nvim-config-local',
     lazy = false,
