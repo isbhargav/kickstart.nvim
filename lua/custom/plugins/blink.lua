@@ -85,12 +85,13 @@ return {
     -- Custom settings for cmdline
     cmdline = {
       keymap = {
-        ['<Tab>'] = { 'accept' },
+        ['<Tab>'] = { 'select_next', 'fallback' },
         ['<CR>'] = { 'accept_and_enter', 'fallback' },
       },
       -- (optionally) automatically show the menu
       completion = {
         menu = { auto_show = true },
+        list = { selection = { preselect = false } },
       },
     },
 
