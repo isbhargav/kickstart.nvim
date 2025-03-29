@@ -5,6 +5,7 @@ return {
   -- optional: provides snippets for the snippet source
   dependencies = {
     'rafamadriz/friendly-snippets',
+    'mikavilpas/blink-ripgrep.nvim',
     {
       'L3MON4D3/LuaSnip',
       version = 'v2.*',
@@ -68,11 +69,14 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev' },
-      per_filetype = { sql = { 'dadbod' } },
+      default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev', 'ripgrep' },
+      per_filetype = {
+        sql = { 'dadbod' },
+      },
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         dadbod = { module = 'vim_dadbod_completion.blink' },
+        ripgrep = { module = 'blink-ripgrep' },
         cmdline = {
           -- ignores cmdline completions when executing shell commands
           enabled = function()
