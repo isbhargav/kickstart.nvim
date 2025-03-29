@@ -138,18 +138,6 @@ return {
   },
 
   {
-    'ray-x/lsp_signature.nvim',
-    enabled = false,
-    event = 'VeryLazy',
-    opts = {
-      hint_prefix = '➤ ',
-      bind = true,
-      handler_opts = {
-        border = 'rounded',
-      },
-    },
-  },
-  {
     -- <c-a> and <c-x> for numbers
     'smjonas/live-command.nvim', -- live command
     config = function()
