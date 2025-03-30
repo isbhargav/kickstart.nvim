@@ -1,3 +1,20 @@
+local openrouter_adapter = function()
+  return require('codecompanion.adapters').extend('openai_compatible', {
+    env = {
+      url = 'https://openrouter.ai/api',
+      api_key = 'OPENROUTER_API_KEY',
+      chat_url = '/v1/chat/completions',
+    },
+    schema = {
+      model = {
+        -- default = 'openrouter/auto',
+        default = 'google/gemini-2.5-pro-exp-03-25:free',
+      },
+    },
+  })
+end
+
+---log_level
 ---@module "lazy"
 ---@type LazySpec
 return {
@@ -14,14 +31,21 @@ return {
     'nvim-treesitter/nvim-treesitter',
   },
   opts = {
+    opts = {
+      log_level = 'DEBUG',
+    },
+    adapters = {
+      opts = { show_defaults = false },
+      openrouter = openrouter_adapter,
+    },
     strategies = {
       chat = {
-        adapter = 'anthropic',
-        -- adapter = 'gemini',
+        adapter = 'openrouter', -- model = 'anthropic/claude-3.5-sonnet',
+        -- adapter = 'anthropic',
       },
       inline = {
-        adapter = 'anthropic',
-        -- adapter = 'gemini',
+        adapter = 'openrouter', --model = 'google/gemini-2.0-flash-001',
+        -- adapter = 'anthropic',
       },
     },
   },
