@@ -101,11 +101,7 @@ return {
     end,
   },
 
-  {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    main = 'ts_context_commentstring',
-    opts = {},
-  },
+
 
   -- swap places of siblings
   {
