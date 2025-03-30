@@ -4,11 +4,16 @@ return {
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
   dependencies = {
-    'rafamadriz/friendly-snippets',
     'mikavilpas/blink-ripgrep.nvim',
     {
       'L3MON4D3/LuaSnip',
       version = 'v2.*',
+      dependencies = {
+        'rafamadriz/friendly-snippets',
+      },
+      config = function()
+        require('luasnip.loaders.from_vscode').lazy_load()
+      end,
     },
   },
 
