@@ -18,9 +18,9 @@ return {
   },
 
   -- use a release tag to download pre-built binaries
-  version = '1.*',
+  -- version = '1.*',
   -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  -- build = 'cargo build --release',
+  build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
   -- build = 'nix run .#build-plugin',
 
@@ -59,7 +59,7 @@ return {
 
     -- (Default) Only show the documentation popup when manually triggered
     completion = {
-      documentation = { auto_show = true, window = { border = 'single' } },
+      documentation = { auto_show = true, window = { border = 'rounded' } },
       menu = {
         border = 'rounded',
         draw = {
@@ -68,7 +68,7 @@ return {
         },
       },
     },
-    signature = { enabled = true, window = { border = 'single' } },
+    signature = { enabled = true, window = { border = 'padded' } },
     snippets = { preset = 'luasnip' },
 
     -- Default list of enabled providers defined so that you can extend it
@@ -111,12 +111,12 @@ return {
     -- See the fuzzy documentation for more information
     fuzzy = {
       implementation = 'prefer_rust_with_warning',
-      sorts = {
-        'exact',
-        -- defaults
-        'score',
-        'sort_text',
-      },
+      -- sorts = {
+      --   'exact',
+      --   -- defaults
+      --   'score',
+      --   'sort_text',
+      -- },
     },
   },
   opts_extend = { 'sources.default' },

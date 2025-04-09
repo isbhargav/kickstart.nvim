@@ -18,7 +18,8 @@ return {
         replace_all = '<leader><cr>',
       },
     }
-    vim.keymap.set({ 'n', 'x' }, '<leader>sr', function()
+
+    vim.keymap.set({ 'n', 'x' }, '<M-f>', function()
       require('ssr').open()
     end)
   end,

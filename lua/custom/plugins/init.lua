@@ -101,8 +101,6 @@ return {
     end,
   },
 
-
-
   -- swap places of siblings
   {
     'Wansmer/sibling-swap.nvim',

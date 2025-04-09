@@ -1,5 +1,5 @@
+-- from tpope's vault
 return {
-  -- from tpope's vault
   'tpope/vim-rhubarb',
   'tpope/vim-unimpaired',
   'tpope/vim-projectionist',
