@@ -81,7 +81,17 @@ return {
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         dadbod = { module = 'vim_dadbod_completion.blink' },
-        ripgrep = { module = 'blink-ripgrep' },
+        ripgrep = {
+          name = 'Ripgrep',
+          module = 'blink-ripgrep',
+          ---@type blink-ripgrep.Options
+          opts = {
+            future_features = {
+              issue185_workaround = true,
+              -- ☝🏻
+            },
+          },
+        },
         cmdline = {
           -- ignores cmdline completions when executing shell commands
           enabled = function()
@@ -111,12 +121,12 @@ return {
     -- See the fuzzy documentation for more information
     fuzzy = {
       implementation = 'prefer_rust_with_warning',
-      -- sorts = {
-      --   'exact',
-      --   -- defaults
-      --   'score',
-      --   'sort_text',
-      -- },
+      sorts = {
+        'exact',
+        -- defaults
+        'score',
+        'sort_text',
+      },
     },
   },
   opts_extend = { 'sources.default' },
