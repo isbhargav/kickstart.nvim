@@ -1,3 +1,107 @@
+-- Define prompt library
+local prompt_library = {
+      ["Describe"] = {
+      strategy = "chat",
+      description = "Describe how code in a buffer works",
+      opts = {
+        index = 100,
+        is_default = true,
+        is_slash_cmd = false,
+        modes = { "v" },
+        short_name = "desc",
+        auto_submit = true,
+        user_prompt = false,
+        stop_context_insertion = true,
+      },
+      prompts = {
+        {
+          role = 'system',
+          content = [[When asked to explain code, follow these steps:
+1. Identify the programming language.
+2. Describe the purpose of the code and reference core concepts from the programming language.
+3. Explain each function or significant block of code, including parameters and return values.
+4. Highlight any specific functions or methods used and their roles.
+5. Provide context on how the code fits into a larger application if applicable.]],
+          opts = {
+            visible = false,
+          },
+        },
+        {
+          role = 'user',
+          content = function(context)
+            local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+            return string.format(
+              [[Please provide a detailed line-by-line explanation of the following code snippet %d:
+```%s
+%s
+```
+
+Add comment on top of each line of code, explain what each line, Any side effects or important implication and The "why" behind implementation choices. Assume you are trying to explain this to a Junior Engineer on your team.
+Assume you're explaining this to a junior engineer
+
+]],
+              context.bufnr,
+              context.filetype,
+              code
+            )
+          end,
+          opts = {
+            contains_code = true,
+          },
+        },
+      },
+    },
+  ['Docs'] = {
+    strategy = 'inline',
+    description = 'Generate documentation comments using LLM',
+    opts = {
+      index = 99,
+      modes = { 'v' },
+      is_default = true,
+      is_slash_cmd = false,
+      user_prompt = false,
+      auto_submit = true,
+    },
+    prompts = {
+      {
+        role = 'system',
+        content = function()
+          return [[When asked to generate documentation, follow these steps:
+1. Identify the programming language.
+2. Analyze the function, method, or class structure.
+3. Generate documentation comments in the appropriate style for that language (e.g., JSDoc, Python docstrings, Rust comments, etc.).
+4. Include descriptions for parameters, return values, and any side effects.
+5. If the code is a class or module, document its purpose and usage.
+6. Keep comments concise but informative.]]
+        end,
+        opts = {
+          visible = false,
+        },
+      },
+      {
+        role = 'user',
+        content = function(context)
+          local code = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
+          return string.format(
+            [[Please add documentation comments above this code from buffer %d.
+Return the same code with only documentation comments added. Do not change the actual code:
+```%s
+%s
+```]],
+            context.bufnr,
+            context.filetype,
+            code
+          )
+        end,
+        opts = {
+          contains_code = true,
+        },
+      },
+    },
+  },
+}
+
+
 ---@module "lazy"
 ---@type LazySpec
 return {
@@ -38,7 +142,7 @@ return {
     end
 
     -- Define prompt library
-    local prompt_library = {
+    local prompt_library_old = {
       ['Docs'] = {
         strategy = 'inline',
         description = 'Generate documentation comments using LLM',
