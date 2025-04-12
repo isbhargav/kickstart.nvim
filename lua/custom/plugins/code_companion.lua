@@ -36,8 +36,7 @@ local prompt_library = {
 %s
 ```
 
-Add comment on top of each line of code, explain what each line, Any side effects or important implication and The "why" behind implementation choices. Assume you are trying to explain this to a Junior Engineer on your team.
-Assume you're explaining this to a junior engineer
+Add comment on top of each line of code, explain what each line does, any side effects or important implication and The "why" behind implementation choices. Assume you are to explaining this to a Junior Engineer on your team.
 
 ]],
             context.bufnr,
@@ -120,10 +119,9 @@ return {
     -- Define adapter configurations
     local function openrouter_adapter()
       local default_model = {
-        -- 'openrouter/auto',
+        'openrouter/auto',
         -- 'google/gemini-2.5-pro-exp-03-25:free',
         -- 'deepseek/deepseek-chat-v3-0324:free',
-        'openrouter/quasar-alpha',
       }
 
       return require('codecompanion.adapters').extend('openai_compatible', {
