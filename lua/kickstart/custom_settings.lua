@@ -35,6 +35,9 @@ vim.cmd [[
   autocmd BufReadPost loclist nnoremap <buffer> <CR> <CR>
 ]]
 
+--search within visual selection - this is magic
+vim.keymap.set('x', '/', '<Esc>/\\%V')
+
 -- Go to definition splits in vertical window
 vim.keymap.set('n', '<C-]>', ':vsplit<CR><C-]>', { noremap = true, silent = true })
 
