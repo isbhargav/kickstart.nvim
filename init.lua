@@ -436,6 +436,7 @@ require('lazy').setup({
       library = {
         -- Load luvit types when the `vim.uv` word is found
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        { path = '${3rd}/hammerspoon/library', words = { 'hs' } },
       },
     },
   },
@@ -690,8 +691,17 @@ require('lazy').setup({
               completion = {
                 callSnippet = 'Replace',
               },
+              workspace = {
+                library = {
+                  vim.fn.expand '$HOME/.hammerspoon/Spoons/EmmyLua.spoon/annotations',
+                  '/Applications/Hammerspoon.app/Contents/Resources/extensions/hs',
+                },
+              },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                globals = { 'hs' },
+                disable = { 'missing-fields' },
+              },
             },
           },
         },
