@@ -5,6 +5,7 @@ return {
   -- optional: provides snippets for the snippet source
   dependencies = {
     'mikavilpas/blink-ripgrep.nvim',
+    'mgalliou/blink-cmp-tmux',
     {
       'L3MON4D3/LuaSnip',
       version = 'v2.*',
@@ -74,17 +75,15 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev', 'ripgrep' },
+      default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev', 'ripgrep', 'tmux' },
       per_filetype = {
         sql = { 'dadbod' },
       },
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         dadbod = { module = 'vim_dadbod_completion.blink' },
-        ripgrep = {
-          name = 'Ripgrep',
-          module = 'blink-ripgrep',
-        },
+        ripgrep = { name = 'Ripgrep', module = 'blink-ripgrep' },
+        tmux = { name = 'tmux', module = 'blink-cmp-tmux' },
         cmdline = {
           -- ignores cmdline completions when executing shell commands
           enabled = function()
