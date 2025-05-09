@@ -77,7 +77,8 @@ return {
     sources = {
       default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev', 'ripgrep', 'tmux' },
       per_filetype = {
-        sql = { 'dadbod' },
+        sql = { 'dadbod', 'buffer', 'path', 'tmux' },
+        gitcommit = { 'snippets', 'buffer', 'path', 'lazydev', 'ripgrep', 'tmux' },
       },
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
