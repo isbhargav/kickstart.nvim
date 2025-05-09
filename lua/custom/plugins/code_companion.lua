@@ -1,3 +1,10 @@
+local default_model = {
+  'openrouter/auto',
+  -- 'openrouter/optimus-alpha',
+  -- 'google/gemini-2.5-pro-exp-03-25:free',
+  -- 'deepseek/deepseek-chat-v3-0324:free',
+}
+
 -- Define prompt library
 local prompt_library = {
   ['Describe'] = {
@@ -106,11 +113,14 @@ return {
   'olimorris/codecompanion.nvim',
   event = 'VimEnter',
   keys = {
+    { '<leader>q', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle CodeCompanion chat window' },
+    { 'zq', '<cmd>CodeCompanionChat<cr>', desc = 'CodeCompanion chat window with selection', mode = { 'v' } },
     { '<leader>ai', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle CodeCompanion chat window' },
     { 'ai', '<cmd>CodeCompanionChat<cr>', desc = 'CodeCompanion chat window with selection', mode = { 'v' } },
     { '<c-g>', '<cmd>CodeCompanionActions<cr>', desc = 'CodeCompanion chat window with selection', mode = { 'n', 'v' } },
     { '<c-space>', '<cmd>CodeCompanion<cr>', desc = 'CodeCompanion chat window with selection', mode = { 'n', 'v' } },
   },
+  branch = 'feat/move-to-function-calling',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
@@ -118,12 +128,6 @@ return {
   opts = function()
     -- Define adapter configurations
     local function openrouter_adapter()
-      local default_model = {
-        'openrouter/auto',
-        -- 'google/gemini-2.5-pro-exp-03-25:free',
-        -- 'deepseek/deepseek-chat-v3-0324:free',
-      }
-
       return require('codecompanion.adapters').extend('openai_compatible', {
         env = {
           url = 'https://openrouter.ai/api',
@@ -153,7 +157,7 @@ return {
             ---@type string
             user = 'Me',
           },
-          show_settings = true,
+          show_settings = false,
           window = {
             layout = 'vertical',
             position = 'right',
@@ -178,22 +182,26 @@ return {
 
       -- Adapter configurations
       adapters = {
-        opts = { show_defaults = false },
+        opts = { show_defaults = true },
         openrouter = openrouter_adapter,
       },
 
       -- Strategy configurations
       strategies = {
         chat = {
-          keymaps = { send = { modes = { n = '<CR><CR>', i = '<CR>' } } },
-          adapter = 'openrouter',
+          adapter = 'openai',
+          model = 'gpt-4.1',
         },
         inline = {
-          adapter = 'openrouter',
+          adapter = 'openai',
+          model = 'gpt-4.1',
+          -- model = 'deepseek/deepseek-chat-v3-0324:free',
         },
         cmd = {
-          adapter = 'openrouter',
-          model = 'deepseek/deepseek-chat-v3-0324:free',
+          adapter = 'openai',
+          model = 'gpt-4.1',
+          -- model = 'o3-mini-2025-01-31',
+          -- model = 'deepseek/deepseek-chat-v3-0324:free',
         },
       },
 

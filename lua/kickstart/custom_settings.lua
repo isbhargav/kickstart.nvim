@@ -72,12 +72,18 @@ vim.keymap.set('n', '<leader>7', '7gt')
 vim.keymap.set('n', '<leader>8', '8gt')
 vim.keymap.set('n', '<leader>9', '9gt')
 
--- border hover window
--- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+-- Add borders to LSP hover window
 local hover = vim.lsp.buf.hover
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.lsp.buf.hover = function()
   return hover { max_width = 100, max_height = 14, border = 'rounded' }
+end
+
+-- Add borders to LSP singature signature_help window
+local signature_help = vim.lsp.buf.signature_help
+---@diagnostic disable-next-line: duplicate-set-field
+vim.lsp.buf.signature_help = function()
+  return signature_help { max_width = 100, max_height = 14, border = 'rounded' }
 end
 
 -- border diagnostic floating window

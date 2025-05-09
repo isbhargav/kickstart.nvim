@@ -18,9 +18,9 @@ return {
   },
 
   -- use a release tag to download pre-built binaries
-  -- version = '1.*',
+  version = '1.*',
   -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  build = 'cargo build --release',
+  -- build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
   -- build = 'nix run .#build-plugin',
 
@@ -84,13 +84,6 @@ return {
         ripgrep = {
           name = 'Ripgrep',
           module = 'blink-ripgrep',
-          ---@type blink-ripgrep.Options
-          opts = {
-            future_features = {
-              issue185_workaround = true,
-              -- ☝🏻
-            },
-          },
         },
         cmdline = {
           -- ignores cmdline completions when executing shell commands
@@ -122,7 +115,7 @@ return {
     fuzzy = {
       implementation = 'prefer_rust_with_warning',
       sorts = {
-        'exact',
+        -- 'exact',
         -- defaults
         'score',
         'sort_text',
