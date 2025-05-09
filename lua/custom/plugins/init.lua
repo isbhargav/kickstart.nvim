@@ -35,7 +35,7 @@ return {
     version = '*', -- Use for stability; omit to use `main` branch for the latest features
     event = 'VeryLazy',
     main = 'nvim-surround',
-    opts = {},
+    config = true,
   },
 
   -- align text
@@ -83,15 +83,6 @@ return {
     end,
   },
 
-  {
-    'akinsho/git-conflict.nvim',
-    version = '*',
-    event = 'BufRead',
-    opts = {
-      disable_diagnostics = true,
-      highlights = { incoming = 'DiffChange', current = 'DiffAdd' },
-    },
-  },
   -- doc gen
   {
     'kkoomen/vim-doge',
