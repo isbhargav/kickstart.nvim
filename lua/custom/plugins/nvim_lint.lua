@@ -9,6 +9,7 @@ return {
       typescript = { 'cspell' },
       javascriptreact = { 'cspell' },
       typescriptreact = { 'cspell' },
+      json = { 'jsonlint' },
       -- scss = {"stylelint"},
       ['*'] = { 'typos' },
     }
