@@ -41,6 +41,7 @@ return {
       ['gx'] = 'actions.open_external',
       ['g.'] = 'actions.toggle_hidden',
       ['g\\'] = 'actions.toggle_trash',
+      ['.'] = { 'actions.open_cmdline', opts = { shorten_path = false } },
     },
   },
   -- Optional dependencies
