@@ -14,15 +14,37 @@ return {
     vim.o.foldenable = true
 
     -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-    vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-    vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    -- vim.keymap.set('n', 'zR', require('ufo').openAllFolds,{desc=""})
+    -- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    -- vim.keymap.set('n', 'zr', function()
+    --   require('ufo').openFoldsExceptKinds()
+    -- end)
+    -- vim.keymap.set('n', 'zm', function()
+    --   require('ufo').closeFoldsWith(3)
+    -- end)
+
+    vim.keymap.set('n', 'zR', function()
+      require('ufo').openAllFolds()
+    end, { desc = 'Open all folds' })
+    vim.keymap.set('n', 'zM', function()
+      require('ufo').closeAllFolds()
+    end, { desc = 'Close all folds' })
     vim.keymap.set('n', 'zr', function()
       require('ufo').openFoldsExceptKinds()
-    end)
+    end, { desc = 'Fold less' })
     vim.keymap.set('n', 'zm', function()
-      require('ufo').closeFoldsWith(3)
-    end)
-
+      require('ufo').closeFoldsWith()
+    end, { desc = 'Fold more' })
+    vim.keymap.set('n', 'zp', function()
+      require('ufo').peekFoldedLinesUnderCursor()
+    end, { desc = 'Peek fold' })
+    vim.keymap.set('n', 'zn', function()
+      require('ufo').openFoldsExceptKinds { 'comment' }
+    end, { desc = 'Fold comments' })
+    vim.keymap.set('n', 'zN', function()
+      require('ufo').openFoldsExceptKinds { 'region' }
+    end, { desc = 'Fold region' })
+    --
     --  https://nanotipsforvim.prose.sh/stop-yourself-from-overnesting
     vim.cmd.highlight 'Overnesting guibg=#E06C75'
     vim.fn.matchadd('Overnesting', ('\t'):rep(5) .. '\t*')
@@ -67,3 +89,11 @@ return {
     -- end,
   },
 }
+
+-- maps.n["zR"] = { function() require("ufo").openAllFolds() end, desc = "Open all folds" }
+-- maps.n["zM"] = { function() require("ufo").closeAllFolds() end, desc = "Close all folds" }
+-- maps.n["zr"] = { function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less", }
+-- maps.n["zm"] = { function() require("ufo").closeFoldsWith() end, desc = "Fold more" }
+-- maps.n["zp"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold", }
+-- maps.n["zn"] = { function() require("ufo").openFoldsExceptKinds({'comment'}) end, desc = "Fold comments" }
+-- maps.n["zN"] = { function() require("ufo").openFoldsExceptKinds({'region'}) end, desc = "Fold region" }

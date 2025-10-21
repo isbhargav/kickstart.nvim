@@ -3,6 +3,59 @@ return {
     'github/copilot.vim',
     enabled = false,
   },
+  {
+    'folke/sidekick.nvim',
+    event = 'VeryLazy',
+    keys = {
+      {
+        '<tab>',
+        function()
+          -- if there is a next edit, jump to it, otherwise apply it if any
+          if not require('sidekick').nes_jump_or_apply() then
+            vim.notify('No suggestion available', 'info', { style = 'minimal' })
+            return '<Tab>' -- fallback to normal tab
+          end
+        end,
+        expr = true,
+        desc = 'Goto/Apply Next Edit Suggestion',
+      },
+      {
+        '<leader>aa',
+        function()
+          require('sidekick.cli').toggle { name = 'opencode' }
+        end,
+        desc = 'Sidekick Toggle CLI',
+      },
+      {
+        '<leader>ap',
+        function()
+          require('sidekick.cli').prompt()
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Sidekick Select Prompt',
+      },
+      {
+        '<leader>av',
+        function()
+          require('sidekick.cli').send { msg = '{selection}' }
+        end,
+        mode = { 'x' },
+        desc = 'Send Visual Selection',
+      },
+    },
+    opts = {
+      cli = {
+        -- win = {
+        --   layout = 'float',
+        --   float = { border = 'rounded' },
+        -- },
+        mux = {
+          backend = 'tmux',
+          enabled = true,
+        },
+      },
+    },
+  },
 
   {
     'supermaven-inc/supermaven-nvim',
@@ -31,56 +84,5 @@ return {
         end, -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
       }
     end,
-  },
-  {
-    'milanglacier/minuet-ai.nvim',
-    enabled = false,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    opts = {
-      virtualtext = {
-        auto_trigger_ft = { 'c', 'python', 'sh', 'rust', 'js' },
-        keymap = {
-          -- accept whole completion
-          accept = '<C-l>',
-          -- accept one line
-          --accept_line = '<A-a>',
-          -- accept n lines (prompts for number)
-          -- e.g. "A-z 2 CR" will accept 2 lines
-          --accept_n_lines = '<A-z>',
-          -- Cycle to prev completion item, or manually invoke completion
-          prev = '<C-k>',
-          -- Cycle to next completion item, or manually invoke completion
-          next = '<C-j>',
-          dismiss = '<C-c>',
-        },
-      },
-      provider = 'openai_compatible',
-      n_completions = 2, -- keep small for resource saving
-      provider_options = {
-        claude = {
-          max_tokens = 128,
-          model = 'claude-3-7-sonnet-20250219',
-        },
-        openai = {
-          optional = {
-            max_tokens = 256,
-          },
-        },
-        openai_compatible = {
-          end_point = 'https://openrouter.ai/api/v1/chat/completions',
-          model = 'mistralai/devstral-small-2505',
-          stream = true,
-          api_key = 'OPENROUTER_API_KEY',
-          name = 'Openrouter',
-          optional = {
-            stop = nil,
-            max_tokens = 256,
-            -- max_tokens = nil,
-          },
-        },
-      },
-    },
   },
 }

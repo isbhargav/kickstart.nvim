@@ -81,10 +81,14 @@ return {
         gitcommit = { 'snippets', 'buffer', 'path', 'lazydev', 'ripgrep', 'tmux' },
       },
       providers = {
+        -- buffer = { min_keyword_length = 2, score_offset = 1 },
+        -- path = { min_keyword_length = 3, score_offset = 2 },
+        -- lsp = { min_keyword_length = 1, score_offset = 3 },
+        -- snippets = { min_keyword_length = 2, score_offset = 4 },
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        ripgrep = { name = 'Ripgrep', module = 'blink-ripgrep', min_keyword_length = 3, score_offset = -5 },
+        tmux = { name = 'tmux', module = 'blink-cmp-tmux', min_keyword_length = 3, score_offset = -5 },
         dadbod = { module = 'vim_dadbod_completion.blink' },
-        ripgrep = { name = 'Ripgrep', module = 'blink-ripgrep' },
-        tmux = { name = 'tmux', module = 'blink-cmp-tmux' },
         cmdline = {
           -- ignores cmdline completions when executing shell commands
           enabled = function()

@@ -10,6 +10,10 @@ return {
     event = 'VeryLazy',
   },
   {
+    'nvim-lua/plenary.nvim', -- We'll use plenary for utility functions
+    lazy = true,
+  },
+  {
     'klen/nvim-config-local',
     lazy = false,
     opts = {

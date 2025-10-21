@@ -6,6 +6,7 @@ return {
   'tpope/vim-dispatch',
   'tpope/vim-eunuch',
   'tpope/vim-abolish',
+  'tpope/vim-rsi',
   {
     'tpope/vim-fugitive',
     lazy = false,
