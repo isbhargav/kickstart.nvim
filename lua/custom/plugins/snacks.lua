@@ -33,8 +33,11 @@ return {
     scroll = { enabled = false },
     statuscolumn = { enabled = false },
     words = { enabled = false },
+    zen = { enabled = false },
   },
   keys = {
+    -- Zen Mode
+    { '<leader>zz', function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
     -- Top Pickers & Explorer
     { '<leader>sf', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
     { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep' },

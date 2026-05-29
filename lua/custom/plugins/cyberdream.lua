@@ -4,7 +4,7 @@ return {
   {
     'scottmckendry/cyberdream.nvim',
     event = { 'ColorScheme', 'UiEnter' },
-    enabled = false,
+    enabled = true,
     priority = 1000,
     config = function()
       require('cyberdream').setup {
@@ -14,11 +14,21 @@ return {
         italic_comments = true,
         hide_fillchars = true,
         terminal_colors = false,
-        cache = false,
+        cache = true,
         overrides = function(c)
+          local blend = require('cyberdream.util').blend
           return {
-            CursorLine = { bg = c.bg },
+            Visual = { bg = blend(c.yellow, c.bg, 0.20) },
+            VisualNOS = { link = 'Visual' },
             CursorLineNr = { fg = c.fg },
+            FloatBorder = { fg = c.grey },
+            PmenuSel = { fg = c.bg, bg = c.blue },
+            LspReferenceText = { bg = blend(c.blue, c.bg, 0.12) },
+            LspReferenceRead = { bg = blend(c.blue, c.bg, 0.12) },
+            LspReferenceWrite = { bg = blend(c.blue, c.bg, 0.12) },
+            Search = { bg = blend(c.yellow, c.bg, 0.25) },
+            IncSearch = { fg = c.bg, bg = c.cyan },
+            CurSearch = { fg = c.bg, bg = c.cyan },
           }
         end,
         -- Override colors

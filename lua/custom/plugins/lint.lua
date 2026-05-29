@@ -8,6 +8,8 @@ return {
     local lint = require 'lint'
 
     lint.linters_by_ft = {
+      c = { 'cpplint' },
+      cpp = { 'cpplint' },
       python = { 'flake8', 'mypy', 'cspell' },
       javascript = { 'cspell' },
       typescript = { 'cspell' },

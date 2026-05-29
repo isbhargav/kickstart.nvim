@@ -604,6 +604,7 @@ require('lazy').setup({
       ---@type table<string, vim.lsp.Config>
       local servers = {
         clangd = {},
+        jdtls = {},
         gopls = {},
         pyright = {},
         rust_analyzer = {},
@@ -693,7 +694,7 @@ require('lazy').setup({
       'vimpostor/vim-prism',
       'EdenEast/nightfox.nvim',
     },
-    enabled = true,
+    enabled = false,
     opts = {
       transparent = false,
       -- styles = {
