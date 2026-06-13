@@ -460,16 +460,16 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
 
       -- Shortcut for searching your Neovim packages
-      vim.keymap.set(
-        'n',
-        '<leader>sp',
-        function()
-          builtin.find_files {
-            cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy'),
-          }
-        end,
-        { desc = '[S]earch Neovim [P]ackages files' }
-      )
+      --   vim.keymap.set(
+      --     'n',
+      --     '<leader>sp',
+      --     function()
+      --       builtin.find_files {
+      --         cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy'),
+      --       }
+      --     end,
+      --     { desc = '[S]earch Neovim [P]ackages files' }
+      --   )
     end,
   },
 
@@ -609,7 +609,7 @@ require('lazy').setup({
         pyright = {},
         rust_analyzer = {},
         -- Swift language server (included with Xcode)
-        sourcekit = {},
+        sourcekit = { filetypes = { 'swift' } },
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
