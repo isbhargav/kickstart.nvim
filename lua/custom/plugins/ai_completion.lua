@@ -2,6 +2,7 @@ return {
   { 'github/copilot.vim', enabled = false },
   {
     'supermaven-inc/supermaven-nvim',
+    enabled = false,
     priority = 1000,
     config = function()
       require('supermaven-nvim').setup {
